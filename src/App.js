@@ -1,5 +1,7 @@
 import "./App.css";
+import Header from "./components/navbar/Header";
 import Products from "./components/Products";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   const PRODUCTS = [
@@ -39,16 +41,22 @@ function App() {
         "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
     },
   ];
+
+  const productItems = PRODUCTS.map((product) => (
+    <Products
+      key={product.title}
+      title={product.title}
+      image={product.imageUrl}
+      price={product.price}
+    />
+  ));
+
   return (
-    <div className='product-list'>
-      {PRODUCTS.map((product) => (
-        <Products
-          key={product.title}
-          title={product.title}
-          image={product.image}
-          price={product.price}
-        />
-      ))}
+    <div>
+      <Cart />
+      <Header />
+      <h1>Ecommerce app</h1>
+      <div className='product-list'>{productItems}</div>
     </div>
   );
 }
