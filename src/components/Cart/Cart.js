@@ -1,53 +1,48 @@
-import React from "react";
 import Modal from "../UI/Modal";
+import classes from "./Cart.module.css";
+import CartItem from "./CartItem";
+import { useContext } from "react";
+import CartContext from "../../store/cart-context";
 
-const Cart = () => {
-  const cartElements = (
-    <ul>
-      {[
-        {
-          title: "Colors",
-          price: 100,
-          imageUrl:
-            "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-          quantity: 2,
-        },
+const Cart = (props) => {
+  const cartCtx = useContext(CartContext);
+  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
 
-        {
-          title: "Black and white Colors",
-          price: 50,
-          imageUrl:
-            "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-          quantity: 3,
-        },
+  const cartItemRemoveHandler = (id) => {
+    cartCtx.removeItem(id);
+  };
 
-        {
-          title: "Yellow and Black Colors",
-          price: 70,
-          imageUrl:
-            "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-          quantity: 1,
-        },
-      ].map((element) => (
-        <li>
-          {element.title} {element.price} {element.quantity}
-        </li>
-      ))}
-    </ul>
+  const cartItems = (
+    <table className={classes["cart-items"]}>
+      <thead>
+        <tr>
+          <th scope='col'>ITEM</th>
+          <th scope='col'>PRICE</th>
+          <th scope='col'>QUANTITY</th>
+        </tr>
+      </thead>
+      <tbody>
+        {cartCtx?.items?.map((item) => (
+          <CartItem
+            key={Math.random()}
+            id={item.id}
+            img={item.image}
+            title={item.title}
+            price={item.price}
+            quantity={item.quantity}
+            onRemove={cartItemRemoveHandler}
+          />
+        ))}
+      </tbody>
+    </table>
   );
-
   return (
-    <Modal>
-      <div>
-        <span>Items</span>
-        <span>Price</span>
-        <span>Quantity</span>
-      </div>
-      {cartElements}
-
-      <div>
-        <button>X</button>
-      </div>
+    <Modal onClose={props.onClose}>
+      <section className={classes.section}>
+        <h2 className={classes.cart}> CART </h2>
+      </section>
+      {cartItems}
+      <h2 className={classes.h2}> Total Rs. {totalAmount}</h2>
     </Modal>
   );
 };
