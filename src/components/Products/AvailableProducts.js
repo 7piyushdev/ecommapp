@@ -43,7 +43,7 @@ const AvailableProducts = () => {
       quantity={1}
     />
   ));
-  console.log(productItems);
+  // console.log(productItems);
   return (
     <section className='container'>
       <h2>Music</h2>

@@ -1,16 +1,12 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
 
-.color-content {
+
+#color-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.color-content div h3 {
+#color-content div h3 {
   display: block;
   width: 100%;
   text-align: center;
@@ -24,32 +20,23 @@
     padding: 20px 30px;
 }
 
-.color-content div {
+#color-content div {
     margin: 30px;
 }
 section h2 {
-    font-family: "Metal Mania";
-    text-align: center;
-    padding: 20px;
-    font-size: 30px;
-}
-h3 {
-    display: block;
-    font-size: 1.17em;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
+  font-family: "Metal Mania";
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
 }
 
-.color-content .prod-details {
+#color-content .prod-details {
     display: flex;
     margin: 8px;
     align-items: center;
     justify-content: space-between;
 }
-.color-content .shop-item-button {
+#color-content .shop-item-button {
     cursor: pointer;
     padding: 8px;
     color: white;
@@ -73,7 +60,4 @@ h3 {
     margin: 0px;
     transition: ease-in 0.5s;
     filter: brightness(100%);
-}
-div {
-    display: block;
 }

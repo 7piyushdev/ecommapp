@@ -1,24 +1,25 @@
 import React, { useContext } from "react";
 import "./Header.css";
 import CartContext from "../../store/cart-context";
+import { NavLink } from "react-router-dom";
 
 const Header = (props) => {
   const cartCtx = useContext(CartContext);
 
   const numberOfCartItems = cartCtx.items.reduce((currNumber, item) => {
-    return currNumber + item.quantity;
+    return parseInt(currNumber) + parseInt(item.quantity);
   }, 0);
   return (
     <header>
       <ul className='header'>
         <li>
-          <a href='./index.html'>HOME</a>
+          <NavLink to='/'>HOME</NavLink>
         </li>
         <li>
-          <a href='./#'>ABOUT</a>
+          <NavLink to='/store'>STORE</NavLink>
         </li>
         <li>
-          <a href='./about.html'>CONTACT</a>
+          <NavLink to='/about'>ABOUT</NavLink>
         </li>
         <button className='cart-holder' onClick={props.onShowCart}>
           Cart

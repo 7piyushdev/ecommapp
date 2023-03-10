@@ -4,11 +4,12 @@ import CartContext from "../../../store/cart-context";
 
 const ProductItem = (props) => {
   const cartCtx = useContext(CartContext);
+  const price = `$${props.price.toFixed(2)}`;
 
   const addToCartHandler = (amount) => {
     cartCtx.addItem({
       id: props.id,
-      name: props.name,
+      title: props.title,
       amount: amount,
       price: props.price,
       image: props.image,
@@ -16,14 +17,14 @@ const ProductItem = (props) => {
     });
   };
   return (
-    <div className='color-content'>
+    <div id='color-content'>
       <div id='album1'>
         <h3>{props.title}</h3>
         <div className='image-container'>
-          <div className='prod-images'>{props.image}</div>
+          <img src={props.image} alt={props.title} />
         </div>
         <div className='prod-details'>
-          <span>${props.price}</span>
+          <span>{price}</span>
           <button
             className='shop-item-button'
             type='button'

@@ -7,9 +7,10 @@ import CartContext from "../../store/cart-context";
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+  console.log(totalAmount);
 
-  const cartItemRemoveHandler = (id) => {
-    cartCtx.removeItem(id);
+  const cartItemRemoveHandler = (item) => {
+    cartCtx.removeItem(item);
   };
 
   const cartItems = (
@@ -19,18 +20,19 @@ const Cart = (props) => {
           <th scope='col'>ITEM</th>
           <th scope='col'>PRICE</th>
           <th scope='col'>QUANTITY</th>
+          <th scope='col'>REMOVE</th>
         </tr>
       </thead>
       <tbody>
         {cartCtx?.items?.map((item) => (
           <CartItem
-            key={Math.random()}
+            key={item.id}
             id={item.id}
             img={item.image}
             title={item.title}
             price={item.price}
             quantity={item.quantity}
-            onRemove={cartItemRemoveHandler}
+            onRemove={cartItemRemoveHandler.bind(null, item.id)}
           />
         ))}
       </tbody>
