@@ -19,11 +19,13 @@ function App() {
     <CartProvider>
       {cartIsShown && <Cart onClose={hideCartHandler} />}
       <Header onShowCart={showCartHandler} />
-      <div className='product-list'></div>
+      {/* <div className='product-list'></div> */}
       <main>
         <Products />
-        <Outlet />
       </main>
+      <div>
+        <Outlet />
+      </div>
     </CartProvider>
   );
 }

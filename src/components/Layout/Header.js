@@ -13,13 +13,16 @@ const Header = (props) => {
     <header>
       <ul className='header'>
         <li>
-          <NavLink to='/'>HOME</NavLink>
+          <NavLink to='/home'>HOME</NavLink>
         </li>
         <li>
           <NavLink to='/store'>STORE</NavLink>
         </li>
         <li>
           <NavLink to='/about'>ABOUT</NavLink>
+        </li>
+        <li>
+          <NavLink to='/contact'>CONTACT</NavLink>
         </li>
         <button className='cart-holder' onClick={props.onShowCart}>
           Cart
