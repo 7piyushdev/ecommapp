@@ -1,50 +1,44 @@
 import Modal from "../UI/Modal";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import CartContext from "../../store/cart-context";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
-  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
-  console.log(totalAmount);
 
-  const cartItemRemoveHandler = (item) => {
-    cartCtx.removeItem(item);
-  };
+  const data = cartCtx.items.map((item) => (
+    <CartItem
+      id={item._id}
+      key={item.id}
+      name={item.title}
+      quantity={item.quantity}
+      price={item.price}
+    ></CartItem>
+  ));
 
-  const cartItems = (
-    <table className={classes["cart-items"]}>
-      <thead>
-        <tr>
-          <th scope='col'>ITEM</th>
-          <th scope='col'>PRICE</th>
-          <th scope='col'>QUANTITY</th>
-          <th scope='col'>REMOVE</th>
-        </tr>
-      </thead>
-      <tbody>
-        {cartCtx?.items?.map((item) => (
-          <CartItem
-            key={item.id}
-            id={item.id}
-            img={item.image}
-            title={item.title}
-            price={item.price}
-            quantity={item.quantity}
-            onRemove={cartItemRemoveHandler.bind(null, item.id)}
-          />
-        ))}
-      </tbody>
-    </table>
-  );
+  useEffect(() => {
+    console.log(cartCtx.items);
+  }, []);
+
+  const cartItems = <ul className={classes["cart-items"]}>{data}</ul>;
   return (
-    <Modal onClose={props.onClose}>
-      <section className={classes.section}>
-        <h2 className={classes.cart}> CART </h2>
-      </section>
+    <Modal hideCartHandler={cartCtx.hideCartHandler}>
+      <span
+        style={{ float: "right", fontSize: "2rem", cursor: "pointer" }}
+        className='m-1'
+        onClick={cartCtx.hideCartHandler}
+      >
+        x
+      </span>
       {cartItems}
-      <h2 className={classes.h2}> Total Rs. {totalAmount}</h2>
+      <div className={classes.total}>
+        <span>Total</span>
+        <span>$ {cartCtx.totalAmount}</span>
+      </div>
+      <div className={classes.actions}>
+        <button className={classes.button}>Purchase</button>
+      </div>
     </Modal>
   );
 };

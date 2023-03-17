@@ -34,13 +34,13 @@ const Contact = () => {
   return (
     <div>
       <form onSubmit={submitHandler}>
-        <label for='name'>Name:</label>
+        <label htmlFor='name'>Name:</label>
         <input type='text' id='name' name='name' ref={nameRef} required />
 
-        <label for='email'>Email:</label>
+        <label htmlFor='email'>Email:</label>
         <input type='email' id='email' name='email' ref={emailRef} required />
 
-        <label for='message'>Phone Number</label>
+        <label htmlFor='message'>Phone Number</label>
         <input
           type='number'
           id='message'

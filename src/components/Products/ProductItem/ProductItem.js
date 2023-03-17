@@ -1,34 +1,37 @@
 import React, { useContext } from "react";
 import "./ProductItem.css";
+import { useNavigate } from "react-router-dom";
 import CartContext from "../../../store/cart-context";
 
 const ProductItem = (props) => {
   const cartCtx = useContext(CartContext);
-  const price = `$${props.price.toFixed(2)}`;
+  const navigate = useNavigate();
 
-  const addToCartHandler = (amount) => {
-    cartCtx.addItem({
-      id: props.id,
-      title: props.title,
-      amount: amount,
-      price: props.price,
-      image: props.image,
-      quantity: props.quantity,
-    });
+  const handleImageClick = (id) => {
+    navigate(`/store/${id}`);
+  };
+
+  const handleSubmit = ({ item }) => {
+    const userName = localStorage.getItem("userName");
+    cartCtx.addToCart({ ...item, quantity: 1 }, userName);
   };
   return (
     <div id='color-content'>
       <div id='album1'>
-        <h3>{props.title}</h3>
+        <h3>{props.item.title}</h3>
         <div className='image-container'>
-          <img src={props.image} alt={props.title} />
+          <img
+            src={props.item.imageUrl}
+            alt={props.item.imageUrl}
+            onClick={() => handleImageClick(props.item.id)}
+          />
         </div>
         <div className='prod-details'>
-          <span>{price}</span>
+          <span> ${props.item.price}</span>
           <button
             className='shop-item-button'
             type='button'
-            onClick={addToCartHandler}
+            onClick={() => handleSubmit(props)}
           >
             ADD TO CART
           </button>

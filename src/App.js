@@ -1,32 +1,22 @@
-import Products from "./components/Products/Products";
 import Header from "./components/Layout/Header";
 import Cart from "./components/Cart/Cart";
-import { useState } from "react";
-import CartProvider from "./store/CartProvider";
+import { useContext } from "react";
 import { Outlet } from "react-router-dom";
+import Footer from "./components/Footer/Footer";
+import CartContext from "./store/cart-context";
 
 function App() {
-  const [cartIsShown, setCartIsShown] = useState(false);
-
-  const showCartHandler = () => {
-    setCartIsShown(true);
-  };
-  const hideCartHandler = () => {
-    setCartIsShown(false);
-  };
+  const cartCtx = useContext(CartContext);
 
   return (
-    <CartProvider>
-      {cartIsShown && <Cart onClose={hideCartHandler} />}
-      <Header onShowCart={showCartHandler} />
-      {/* <div className='product-list'></div> */}
-      <main>
-        <Products />
-      </main>
+    <>
+      {cartCtx.showCart && <Cart hideCartHandler={cartCtx.hideCartHandler} />}
+      <Header showCartHandler={cartCtx.showCartHandler} />
       <div>
         <Outlet />
       </div>
-    </CartProvider>
+      <Footer />
+    </>
   );
 }
 

@@ -33,21 +33,14 @@ const PRODUCTS = [
 ];
 
 const AvailableProducts = () => {
-  const productItems = PRODUCTS.map((product) => (
-    <ProductItem
-      key={product.id}
-      id={product.id}
-      title={product.title}
-      image={product.imageUrl}
-      price={product.price}
-      quantity={1}
-    />
-  ));
-  // console.log(productItems);
   return (
     <section className='container'>
       <h2>Music</h2>
-      <div>{productItems}</div>
+      <div>
+        {PRODUCTS.map((item) => {
+          return <ProductItem key={item.id} item={item} />;
+        })}
+      </div>
     </section>
   );
 };
